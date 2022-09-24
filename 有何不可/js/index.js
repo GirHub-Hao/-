@@ -63,7 +63,6 @@ const binding = function binding(lyric) {
     wrapper.innerHTML = str;
     lyricList = Array.from(wrapper.querySelectorAll('p'));
     PH = lyricList[0].offsetHeight;
-    console.log(data);
 }
 
 /* 歌词滚动 & 进度条处理 */
@@ -105,8 +104,8 @@ const handleLyric = function handleLyric() {
         }
     }
     //控制歌词移动
-    if (num >= 5) {
-        wrapper.style.top = `${-(num - 4) * PH}px`;
+    if (num >= 6) {
+        wrapper.style.top = `${-(num - 5) * PH}px`;
     }
     //音乐播放结束
     if (currentTime >= duration) {
@@ -159,25 +158,9 @@ const handle = function handle() {
     });
 };
 
-// document.addEventListener('visibilitychange', function () {
-//     if (document.hidden) {
-//         //离开页卡
-//         clearInterval(autoTimer);
-//         autoTimer = null;
-//         return;
-//     }
-
-//     if (autoTimer === null) {
-//         //进入页卡
-//         $sub.emit('playing');
-//         autoTimer = setInterval(() => {
-//             $sub.emit('playing');
-//         }, 1000)
-//     }
-// });
 
 queryData()
     .then(value => {
         binding(value);
         handle();
-    })
+    });
